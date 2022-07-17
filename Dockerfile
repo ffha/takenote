@@ -12,6 +12,7 @@ RUN rm package-lock.json
 # Make sure dependencies exist for Webpack loaders
 RUN apk add build-base nasm autoconf automake python3
 RUN ln -s /usr/bin/python3 /usr/bin/python
+RUN ln -s /usr/bin/python3 /usr/bin/python2
 RUN yarn
 
 # Build production client side React application
