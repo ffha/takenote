@@ -8,19 +8,9 @@ ARG CLIENT_ID
 COPY . app/
 
 WORKDIR app/
-
+RUN rm package-lock.json
 # Make sure dependencies exist for Webpack loaders
-RUN apk add  \
-  autoconf \
-  automake \
-  bash \
-  g++ \
-  libc6-compat \
-  libjpeg-turbo-dev \
-  libpng-dev \
-  make \
-  nasm \
-  tini
+RUN apk add build-base nasm autoconf automake
 RUN yarn
 
 # Build production client side React application
