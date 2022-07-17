@@ -8,18 +8,15 @@ ARG CLIENT_ID
 COPY . app/
 
 WORKDIR app/
-RUN rm package-lock.json
 # Make sure dependencies exist for Webpack loaders
-RUN apk add build-base nasm autoconf automake python3 libc6-compat libjpeg-turbo-dev libpng-dev  make
-RUN ln -s /usr/bin/python3 /usr/bin/python
-RUN ln -s /usr/bin/python3 /usr/bin/python2
-RUN yarn
+RUN apk add musl-dev libc6-compat libjpeg-turbo-dev libpng-dev make gcc g++ nasm bash
+RUN npm ci --only-production --silent
 
 # Build production client side React application
-RUN yarn build
+RUN npm run build
 
 # Expose port for Node
 EXPOSE $PORT
 
 ENTRYPOINT ["/sbin/tini", "--"]
-ENTRYPOINT ["npm", "run", "prod"]
+CMD ["npm", "run", "prod"]
