@@ -10,7 +10,7 @@ COPY . app/
 WORKDIR app/
 RUN rm package-lock.json
 # Make sure dependencies exist for Webpack loaders
-RUN apk add build-base nasm autoconf automake python3
+RUN apk add build-base nasm autoconf automake python3 libc6-compat libjpeg-turbo-dev libpng-dev  make
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN ln -s /usr/bin/python3 /usr/bin/python2
 RUN yarn
